@@ -23,7 +23,7 @@ class PhoneScoringService
     public function getOperator(string $phoneNumber): ?string
     {
         $digits = preg_replace('/\D/', '', $phoneNumber);
-        $prefix = substr($digits, 1, 4);
+        $prefix = substr($digits, 1, 3);
         return $this->prefixMap[$prefix] ? $this->prefixMap[$prefix] : null;
     }
 

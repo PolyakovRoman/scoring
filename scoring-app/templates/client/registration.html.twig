@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация клиента{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('success-registration') %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <h1>Регистрация клиента</h1>
+
+    {{ form_start(form, { attr: { novalidate: 'novalidate', 'data-turbo': 'false' } }) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.education) }}
+        {{ form_row(form.consent) }}
+        <button>Сохранить</button>
+    {{ form_end(form) }}
+
+{% endblock %}

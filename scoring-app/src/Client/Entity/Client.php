@@ -4,9 +4,13 @@ namespace App\Client\Entity;
 
 use App\Client\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use App\Enum\EducationLevel;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
+#[UniqueEntity(fields: ['email'],message: 'Пользователь с таким email уже существует')]
+#[UniqueEntity(fields: ['phone'],message: 'Пользователь с таким номером телефона уже существует')]
 class Client
 {
     #[ORM\Id]
@@ -14,29 +18,40 @@ class Client
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'Заполните имя')]
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+    #[Assert\NotBlank(message: 'Заполните фамилию')]
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Заполните телефон')]
+    #[Assert\Regex(pattern: '/^(\\+7|7|8)\\d{10}$/', message: 'Введите корректный российский номер телефона')]
+    #[ORM\Column(length: 20, unique: true)]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Заполните Email')]
+    #[Assert\Email(message: 'Введите корректный email')]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(type: "string", enumType: EducationLevel::class)]
     private ?EducationLevel $education = null;
 
-    #[ORM\Column(nullable: false)]
-    private ?bool $consent = null;
+    #[ORM\Column]
+    private ?bool $consent = false;
 
     #[ORM\Column]
     private ?int $score = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
