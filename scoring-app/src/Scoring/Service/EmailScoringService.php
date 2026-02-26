@@ -1,5 +1,5 @@
 <?php
-namespace App\Scoring\Rule;
+namespace App\Scoring\Service;
 
 class EmailScoringService
 {

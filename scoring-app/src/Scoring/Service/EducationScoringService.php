@@ -1,5 +1,5 @@
 <?php
-namespace App\Scoring\Rule;
+namespace App\Scoring\Service;
 
 use App\Enum\EducationLevel;
 
