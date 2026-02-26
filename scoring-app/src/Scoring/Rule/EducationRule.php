@@ -1,13 +1,14 @@
 <?php
-namespace App\Scoring\Service;
+namespace App\Scoring\Rule;
 
+use App\Client\Entity\Client;
 use App\Enum\EducationLevel;
 
-class EducationScoringService
+class EducationRule
 {
-    public function getScore(?EducationLevel $educationLevel): int
+    public function getScore(Client $client): int
     {
-        return match($educationLevel) {
+        return match($client->getEducation()) {
             EducationLevel::SECONDARY => 5,
             EducationLevel::SPECIAL => 10,
             EducationLevel::HIGHER => 15,

@@ -3,25 +3,29 @@
 namespace App\Scoring;
 
 use App\Client\Entity\Client;
+use App\Scoring\Rule\PhoneRule;
+use App\Scoring\Rule\EmailRule;
+use App\Scoring\Rule\EducationRule;
 
 class ScoringService
 {
-    public function __construct(private Service\PhoneScoringService $phoneScoringService, private Service\EmailScoringService $emailScoringService, private Service\EducationScoringService $educationScoringService) {}
+    private array $rules;
+
+    public function __construct() {
+
+        $this->rules = [
+            new PhoneRule(),
+            new EmailRule(),
+            new EducationRule()
+        ];
+    }
 
     public function calc(Client $client): int
     {
         $score = 0;
 
-        if($client->getPhone()){
-            $score += $this->phoneScoringService->getScore($client->getPhone());
-        }
-
-        if($client->getEmail()){
-            $score += $this->emailScoringService->getScore($client->getEmail());
-        }
-
-        if($client->getEducation()){
-            $score += $this->educationScoringService->getScore($client->getEducation());
+        foreach ($this->rules as $rule) {
+            $score += $rule->getScore($client);
         }
 
         if($client->isConsent()){

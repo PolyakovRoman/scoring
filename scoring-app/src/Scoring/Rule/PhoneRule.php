@@ -1,7 +1,9 @@
 <?php
-namespace App\Scoring\Service;
+namespace App\Scoring\Rule;
 
-class PhoneScoringService
+use App\Client\Entity\Client;
+
+class PhoneRule
 {
     private array $prefixMap = [
         '920' => 'МегаФон',
@@ -27,9 +29,9 @@ class PhoneScoringService
         return $this->prefixMap[$prefix] ? $this->prefixMap[$prefix] : null;
     }
 
-    public function getScore(string $phoneNumber): int
+    public function getScore(Client $client): int
     {
-        $operator = $this->getOperator($phoneNumber);
+        $operator = $this->getOperator($client->getPhone());
         return match($operator) {
             'МегаФон' => 10,
             'Билайн' => 5,

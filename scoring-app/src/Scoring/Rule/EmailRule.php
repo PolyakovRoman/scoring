@@ -1,7 +1,9 @@
 <?php
-namespace App\Scoring\Service;
+namespace App\Scoring\Rule;
 
-class EmailScoringService
+use App\Client\Entity\Client;
+
+class EmailRule
 {
     public function getDomain(string $email): string
     {
@@ -9,9 +11,9 @@ class EmailScoringService
         return substr($domain, 0, strrpos($domain, "."));
     }
 
-    public function getScore(string $email): int
+    public function getScore(Client $client): int
     {
-        $domain = $this->getDomain($email);
+        $domain = $this->getDomain($client->getEmail());
         return match($domain) {
             'gmail' => 10,
             'yandex' => 8,
