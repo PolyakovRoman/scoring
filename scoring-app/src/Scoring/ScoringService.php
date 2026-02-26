@@ -6,7 +6,7 @@ use App\Client\Entity\Client;
 
 class ScoringService
 {
-    public function __construct(private Rule\PhoneScoringService $phoneScoringService, private Rule\EmailScoringService $emailScoringService, private Rule\EducationScoringService $educationScoringService) {}
+    public function __construct(private Service\PhoneScoringService $phoneScoringService, private Service\EmailScoringService $emailScoringService, private Service\EducationScoringService $educationScoringService) {}
 
     public function calc(Client $client): int
     {
