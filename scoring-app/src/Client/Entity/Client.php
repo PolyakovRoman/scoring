@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Client\Entity;
 
-use App\Repository\ClientRepository;
+use App\Client\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Enum\EducationLevel;
 

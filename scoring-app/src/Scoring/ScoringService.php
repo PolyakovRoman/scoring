@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Scoring;
 
-use App\Entity\Client;
+use App\Client\Entity\Client;
 
 class ScoringService
 {
