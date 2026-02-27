@@ -15,8 +15,20 @@ use Knp\Component\Pager\PaginatorInterface;
 
 final class ClientController extends AbstractController
 {
+    /**
+     * Регистрация клиента
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ScoringService $scoringService
+     * @return Response
+     */
     #[Route('/client/registration', name: 'client_registration')]
-    public function registration(Request $request, EntityManagerInterface $em, ScoringService $scoringService): Response
+    public function registration(
+        Request $request,
+        EntityManagerInterface $em,
+        ScoringService $scoringService
+    ): Response
     {
         $client = new Client();
 
@@ -37,6 +49,12 @@ final class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Страница просмотра клиента
+     *
+     * @param Client $client
+     * @return Response
+     */
     #[Route('/client/{id}', name: 'client_show')]
     public function show(Client $client): Response
     {
@@ -45,8 +63,22 @@ final class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Страница редактирования клиента
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param ScoringService $scoringService
+     * @param Client $client
+     * @return Response
+     */
     #[Route('/client/{id}/edit', name: 'client_edit')]
-    public function edit(Request $request, EntityManagerInterface $em, ScoringService $scoringService, Client $client): Response
+    public function edit(
+        Request $request,
+        EntityManagerInterface $em,
+        ScoringService $scoringService,
+        Client $client
+    ): Response
     {
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
@@ -65,11 +97,27 @@ final class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Список клиентов
+     *
+     * @param ClientRepository $clientRepository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/clients', name: 'client_list')]
-    public function index(ClientRepository $clientRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(
+        ClientRepository $clientRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response
     {
         $query = $clientRepository->createListQuery();
-        $clients = $paginator->paginate($query, $request->query->getInt('page', 1), 15);
+        $clients = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            15
+        );
         return $this->render('client/index.html.twig', [
             'clients' => $clients,
         ]);

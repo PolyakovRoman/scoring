@@ -20,6 +20,12 @@ class ScoringService
         ];
     }
 
+    /**
+     * Расчет скоринга клиентов
+     *
+     * @param Client $client
+     * @return int
+     */
     public function calc(Client $client): int
     {
         $score = 0;
