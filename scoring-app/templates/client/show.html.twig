@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Информация о клиенте {{ client.id }}{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('client_list') }}">Назад</a>
+
+    <h1>Клиент {{ client.firstName }} (<a href="{{ path('client_edit', {id: client.id}) }}">Редактировать</a>)</h1>
+    <div>
+        <ul>
+            <li>ID: {{ client.id }}</li>
+            <li>Скоринг: {{ client.score }}</li>
+            <li>Имя: {{ client.firstName }}</li>
+            <li>Фамилия: {{ client.lastName }}</li>
+            <li>Телефон: {{ client.phone }}</li>
+            <li>Email: {{ client.email }}</li>
+            <li>Образование: {{ client.education.value }}</li>
+            <li>Согласие на обработку моих личных данных: {{ client.consent ? 'Да' : 'Нет' }}</li>
+        </ul>
+    </div>
+
+{% endblock %}

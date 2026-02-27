@@ -26,7 +26,7 @@ class PhoneRule
     {
         $digits = preg_replace('/\D/', '', $phoneNumber);
         $prefix = substr($digits, 1, 3);
-        return $this->prefixMap[$prefix] ? $this->prefixMap[$prefix] : null;
+        return isset($this->prefixMap[$prefix]) ? $this->prefixMap[$prefix] : null;
     }
 
     public function getScore(Client $client): int

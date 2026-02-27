@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClientController!{% endblock %}
+{% block title %}>Список клиентов{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/var/www/scoring/scoring-app/src/Controller/ClientController.php</code></li>
-        <li>Your template at <code>/var/www/scoring/scoring-app/templates/client/index.html.twig</code></li>
-    </ul>
-</div>
+    <h1>Список клиентов (<a href="{{ path('client_registration') }}">Регистрация клиента</a>)</h1>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Скоринг</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Образование</th>
+            <th>Согласие на обработку моих личных данных</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.score }}</td>
+                <td>{{ client.firstName }}</td>
+                <td>{{ client.lastName }}</td>
+                <td>{{ client.phone }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.education.value }}</td>
+                <td>{{ client.consent ? 'Да' : 'Нет' }}</td>
+                <td>
+                    <p><a href="{{ path('client_show', {id: client.id}) }}">Просмотр</a></p>
+                    <p><a href="{{ path('client_edit', {id: client.id}) }}">Редактировать</a></p>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        {{ knp_pagination_render(clients) }}
+    </div>
 {% endblock %}

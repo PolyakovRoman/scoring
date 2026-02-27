@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Регистрация клиента{% endblock %}
+{% block title %}Редактирование клиета {{ client.id }}{% endblock %}
 
 {% block body %}
 
-    <a href="{{ path('client_list') }}">Список клиентов</a>
+    <a href="{{ path('client_list') }}">Назад</a>
+    <br><br>
 
-    <br>
-
-    {% for message in app.flashes('success-registration') %}
+    {% for message in app.flashes('success-edit') %}
         <div>
             {{ message }}
         </div>
     {% endfor %}
 
-    <h1>Регистрация клиента</h1>
-
+    <h1>Редактирование клиета {{ client.firstName }}</h1>
     {{ form_start(form, { attr: { novalidate: 'novalidate', 'data-turbo': 'false' } }) }}
+        <p>Скоринг: {{ client.score }}</p>
         {{ form_errors(form) }}
         {{ form_row(form.firstName) }}
         {{ form_row(form.lastName) }}
