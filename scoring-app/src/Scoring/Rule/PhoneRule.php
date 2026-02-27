@@ -3,7 +3,7 @@ namespace App\Scoring\Rule;
 
 use App\Client\Entity\Client;
 
-class PhoneRule
+class PhoneRule implements ScoringRuleInterface
 {
     private array $prefixMap = [
         '920' => 'МегаФон',

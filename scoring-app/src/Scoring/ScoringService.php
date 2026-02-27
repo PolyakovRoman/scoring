@@ -3,22 +3,14 @@
 namespace App\Scoring;
 
 use App\Client\Entity\Client;
-use App\Scoring\Rule\PhoneRule;
-use App\Scoring\Rule\EmailRule;
-use App\Scoring\Rule\EducationRule;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
 class ScoringService
 {
-    private array $rules;
-
-    public function __construct() {
-
-        $this->rules = [
-            new PhoneRule(),
-            new EmailRule(),
-            new EducationRule()
-        ];
-    }
+    public function __construct(
+        #[TaggedIterator('app.scoring_rule')]
+        private iterable $rules
+    ) {}
 
     /**
      * Расчет скоринга клиентов

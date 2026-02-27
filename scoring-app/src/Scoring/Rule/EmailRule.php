@@ -3,7 +3,7 @@ namespace App\Scoring\Rule;
 
 use App\Client\Entity\Client;
 
-class EmailRule
+class EmailRule implements ScoringRuleInterface
 {
     public function getDomain(string $email): string
     {
