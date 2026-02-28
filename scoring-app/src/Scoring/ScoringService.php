@@ -16,20 +16,26 @@ class ScoringService
      * Расчет скоринга клиентов
      *
      * @param Client $client
-     * @return int
+     * @return array
      */
-    public function calc(Client $client): int
+    public function calc(Client $client): array
     {
-        $score = 0;
+        $result = array(
+            'score' => 0,
+            'detail' => array()
+        );
 
         foreach ($this->rules as $rule) {
-            $score += $rule->getScore($client);
+            $score = $rule->getScore($client);
+            $result['score'] += $score;
+            $result['detail'][] = $rule->getName().' ('.$rule->getValue($client).')'.': '.$score;
         }
 
         if($client->isConsent()){
-            $score += 4;
+            $result['score'] += 4;
+            $result['detail'][] = 'Согласие на обработку моих личных данных : 4';
         }
 
-        return $score;
+        return $result;
     }
 }

@@ -37,7 +37,7 @@ final class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $score = $scoringService->calc($client);
-            $client->setScore($score);
+            $client->setScore($score['score']);
             $em->persist($client);
             $em->flush();
             $this->addFlash('success-registration', 'Регистрация успешно завершена');
@@ -85,7 +85,7 @@ final class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $score = $scoringService->calc($client);
-            $client->setScore($score);
+            $client->setScore($score['score']);
             $em->flush();
             $this->addFlash('success-edit', 'Пользователь успешно обновлен');
             return $this->redirectToRoute('client_edit', ['id' => $client->getId()]);

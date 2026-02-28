@@ -15,4 +15,14 @@ class EducationRule implements ScoringRuleInterface
             default => 0,
         };
     }
+
+    public function getName(): string
+    {
+        return 'Образование';
+    }
+
+    public function getValue(Client $client): string
+    {
+        return (string)$client->getEducation()->value;
+    }
 }

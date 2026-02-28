@@ -39,4 +39,14 @@ class PhoneRule implements ScoringRuleInterface
             default => 1,
         };
     }
+
+    public function getName(): string
+    {
+        return 'Телефон';
+    }
+
+    public function getValue(Client $client): string
+    {
+        return (string)$client->getPhone();
+    }
 }

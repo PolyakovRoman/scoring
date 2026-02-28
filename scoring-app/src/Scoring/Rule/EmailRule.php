@@ -21,4 +21,14 @@ class EmailRule implements ScoringRuleInterface
             default => 3,
         };
     }
+
+    public function getName(): string
+    {
+        return 'Email';
+    }
+
+    public function getValue(Client $client): string
+    {
+        return (string)$client->getEmail();
+    }
 }
