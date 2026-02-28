@@ -89,7 +89,7 @@ class Client
 
     public function setPhone(string $phone): static
     {
-        $this->phone = $phone;
+        $this->phone = preg_replace('/\D/', '', $phone);
 
         return $this;
     }
