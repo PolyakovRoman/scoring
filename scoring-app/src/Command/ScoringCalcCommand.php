@@ -55,6 +55,8 @@ class ScoringCalcCommand extends Command
             }
         }
 
+        $this->em->flush();
+
         return Command::SUCCESS;
     }
 
@@ -69,7 +71,5 @@ class ScoringCalcCommand extends Command
         $output->writeln('Общий скоринг: '.$result['score'].PHP_EOL);
 
         $client->setScore($result['score']);
-
-        $this->em->flush();
     }
 }
