@@ -21,3 +21,12 @@
 ### **Фикстура**
 
 - _php bin/console doctrine:fixtures:load_
+
+### **Тесты**
+
+- _php bin/phpunit tests/Scoring/Rule/PhoneTest.php_ - Unit тест расчета скоринга для ноемра телефона
+- _php bin/phpunit tests/Scoring/Rule/EmailTest.php_ - Unit тест расчета скоринга для Email
+- _php bin/phpunit tests/Scoring/Rule/EducationTest.php_ - Unit тест расчета скоринга для Образвания
+
+
+- _php bin/phpunit tests/Scoring/ScoringServiceTest.php_ - Интегративный тест ScoringService
