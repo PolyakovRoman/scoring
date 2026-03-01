@@ -20,4 +20,4 @@
 
 ### **Фикстура**
 
-- php bin/console doctrine:fixtures:load
+- _php bin/console doctrine:fixtures:load_
