@@ -1,10 +1,10 @@
 ### **Запуск проекта**
-- docker compose up -d --build
-- docker exec -it scoring-php bash
-- cd scoring-app/
-- composer install
-- php bin/console doctrine:database:create
-- php bin/console doctrine:migrations:migrate
+- _docker compose up -d --build_
+- _docker exec -it scoring-php bash_
+- _cd scoring-app/_
+- _composer install_
+- _php bin/console doctrine:database:create_
+- _php bin/console doctrine:migrations:migrate_
 
 ### **Точки входа**
 
@@ -15,8 +15,8 @@
 
 ### **Консольные команды**
 
-- php bin/console app:scoring-calc - Расчет скоринга для все клиентов с детализацией
-- php bin/console app:scoring-calc - {ID клиента} Расчет скоринга для конкретного клиента с детализацией
+- _php bin/console app:scoring-calc_ - Расчет скоринга для все клиентов с детализацией
+- _php bin/console app:scoring-calc {ID клиента}_ - Расчет скоринга для конкретного клиента с детализацией
 
 ### **Фикстура**
 
