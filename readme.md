@@ -33,8 +33,3 @@
 
 
 - _php bin/phpunit tests/Command/ScoringCalcCommandTest.php_ Интегративный тест консольной команды
-
-> Перед запуском интегративного теста консольной команды нужно создать тестовую базу
-> - php bin/console doctrine:database:create --env=test
-> - php bin/console doctrine:migrations:migrate -e test
-> - php bin/console doctrine:fixtures:load -e test
