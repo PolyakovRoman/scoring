@@ -28,7 +28,7 @@ class EducationTest extends TestCase
     public function testSpecial(): void
     {
         $client = new Client();
-        $client->setEducation(EducationLevel::SPECIAL);
+        $client->setEducation(EducationLevel::SPECIAL); //Специальное образование
 
         $this->assertEquals(10, $this->educationRule->getScore($client));
         $this->assertTrue(true);
@@ -37,7 +37,7 @@ class EducationTest extends TestCase
     public function testHigher(): void
     {
         $client = new Client();
-        $client->setEducation(EducationLevel::HIGHER);
+        $client->setEducation(EducationLevel::HIGHER); //Высшее образование
 
         $this->assertEquals(15, $this->educationRule->getScore($client));
         $this->assertTrue(true);
